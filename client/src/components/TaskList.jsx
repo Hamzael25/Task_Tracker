@@ -52,6 +52,6 @@ const TaskList = ({reload, triggerRefresh}) => {
 		)}
 	</>
 	);
-};
+}; 
 
 export default TaskList;
