@@ -1,7 +1,7 @@
 import React, {useState ,useEffect}from 'react'
 import axios from 'axios'
 
-const TaskList = () => {
+const TaskList = ({reload}) => {
 	const [list, setList] = useState([]);
 		useEffect(() => {
 			const getList = async () => {
@@ -9,7 +9,7 @@ const TaskList = () => {
 			setList(res.data);
 		};
 		getList();
-  }, []);
+  }, [reload]);
 
 	return (
 	<>
