@@ -5,20 +5,30 @@ const TaskForm = ({onTaskAdded}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('pending');
-
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
 	const handleSubmit = async (e) => {
-    e.preventDefault();
-		await axios.post('http://localhost:3000/tasks', {
-			title,
-			description,
-			status
-		});
-		setTitle('');
-		setDescription('');
-		setStatus('pending');
+		e.preventDefault();
+		setLoading(true);
+		setError(null);
+		try {
+			await axios.post('http://localhost:3000/tasks', {
+				title,
+				description,
+				status
+			});
+			setTitle('');
+			setDescription('');
+			setStatus('pending');
 
-		onTaskAdded();
+			onTaskAdded();
+		} catch (err) {
+			console.error(err);
+			setError('Failed to add task.');
+		} finally {
+			setLoading(false);
+		}
   };
 
 
@@ -34,9 +44,11 @@ const TaskForm = ({onTaskAdded}) => {
       </select>
 
       <button type="submit">
-				Add Task
+				{loading ? 'Adding...' : 'Add Task'}
 			</button>
 
+			{error && <p style={{color: 'red'}}>{error}</p>}
+			
     </form>
 	);
 
