@@ -1,0 +1,23 @@
+{
+  "name": "task-tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+		"dev": "concurrently \"npm run start --prefix server\" \"npm run dev --prefix client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hamzael25/Task_Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hamzael25/Task_Tracker/issues"
+  },
+  "homepage": "https://github.com/Hamzael25/Task_Tracker#readme",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}
