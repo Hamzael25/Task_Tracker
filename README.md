@@ -65,8 +65,12 @@ L’objectif : partir de zéro et livrer une application fonctionnelle permettan
 # 1. Cloner le dépôt
 git clone https://github.com/Hamzael25/Task_Tracker.git
 cd Task_Tracker
-
+```
+```bash
 # 2. Installer les dépendances et lancer le projet (frontend + backend en même temps)
+npm install --prefix server
+npm install --prefix client
 npm install
 npm run dev
+
 
