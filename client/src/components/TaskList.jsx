@@ -6,12 +6,24 @@ import TaskFilter from './TaskFilter';
 const TaskList = ({reload, triggerRefresh}) => {
 	const [list, setList] = useState([]);
 	const [filter, setFilter] = useState('all');
-		useEffect(() => {
-			const getList = async () => {
-			const res = await axios.get('http://localhost:3000/tasks');
-			setList(res.data);
-		};
-		getList();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const getList = async () => {
+			setLoading(true);
+			setError(null);
+			try {
+				const res = await axios.get('http://localhost:3000/tasks');
+				setList(res.data);
+			} catch (err) {
+				console.error(err);
+				setError('Failed to load tasks.');
+			} finally {
+				setLoading(false);
+			}
+	};
+	getList();
   }, [reload]);
 
 	const filteredList = list.filter(task => {
@@ -23,17 +35,21 @@ const TaskList = ({reload, triggerRefresh}) => {
 	return (
 	<>
 		<TaskFilter onFilterChange={setFilter} />
-		<ul>
-			{filteredList.map(task => (
-				<TaskItem
-					id={task.id}
-					title={task.title}
-					description={task.description}
-					status={task.status}
-					triggerRefresh={triggerRefresh}
-				/>
-			))}
-		</ul>
+		{loading && <p>Loading tasks...</p>}
+		{error && <p style={{color: 'red'}}>{error}</p>}
+		{!loading && !error && (
+			<ul>
+				{filteredList.map(task => (
+					<TaskItem
+						id={task.id}
+						title={task.title}
+						description={task.description}
+						status={task.status}
+						triggerRefresh={triggerRefresh}
+					/>
+				))}
+			</ul>
+		)}
 	</>
 	);
 };
