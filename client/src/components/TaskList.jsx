@@ -1,7 +1,8 @@
 import React, {useState ,useEffect}from 'react'
 import axios from 'axios'
+import TaskItem from './TaskItem';
 
-const TaskList = ({reload}) => {
+const TaskList = ({reload, triggerRefresh}) => {
 	const [list, setList] = useState([]);
 		useEffect(() => {
 			const getList = async () => {
@@ -15,11 +16,13 @@ const TaskList = ({reload}) => {
 	<>
 		<ul>
 			{list.map(task => (
-				<li key={task.id}>
-					<strong>Title: </strong>{task.title} - 
-					<strong> Description: </strong>{task.description} - 
-					<strong> Status: </strong>{task.status}
-				</li>
+				<TaskItem
+					id={task.id}
+					title={task.title}
+					description={task.description}
+					status={task.status}
+					triggerRefresh={triggerRefresh}
+				/>
 			))}
 		</ul>
 	</>

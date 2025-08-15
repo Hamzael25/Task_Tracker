@@ -11,7 +11,7 @@ function App() {
   return (
     <>
 			<TaskForm onTaskAdded={refresh}/>
-      <TaskList reload={reload}/>
+      <TaskList reload={reload} triggerRefresh={refresh}/>
     </>
   )
 }
