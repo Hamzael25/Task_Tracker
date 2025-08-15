@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 app.listen(3000, () => {
-	console.log("app listen on 3000");
+	console.log("app listen on http://localhost:3000");
 });
 
 app.get('/tasks', (req, res) => {
