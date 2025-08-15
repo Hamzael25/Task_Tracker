@@ -16,9 +16,9 @@ const TaskList = () => {
 		<ul>
 			{list.map(task => (
 				<li key={task.id}>
-					<strong>Title: </strong> - 
-					<strong> Description: </strong> - 
-					<strong> Status: </strong>
+					<strong>Title: </strong>{task.title} - 
+					<strong> Description: </strong>{task.description} - 
+					<strong> Status: </strong>{task.status}
 				</li>
 			))}
 		</ul>
